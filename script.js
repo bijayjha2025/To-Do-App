@@ -15,13 +15,26 @@ function addTask(){
         li.appendChild(span);
     }
     inputBox.value = "";
+    saveData();
 }
 
 listOfTasks.addEventListener("click", function(e){
     if(e.target.tagName === "LI"){
         e.target.classList.toggle("checked");
+        saveData();
     }
     else if(e.target.tagName === "SPAN"){
         e.target.parentElement.remove();
+        saveData();
     }
 }, false);
+
+function saveData(){
+    localStorage.setItem("data", listOfTasks.innerHTML);
+}
+
+function displayTask(){
+    listOfTasks.innerHTML = localStorage.getItem("data");
+}
+
+displayTask();
